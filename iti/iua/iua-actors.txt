@@ -1,0 +1,9 @@
+## use dot -Tpng thisefile > thisfile.png to generate graphics
+
+digraph OAuth {
+rankdir = LR;
+node [shape=box]; AuthorizationClient; AuthorizationServer; ResourceServer;
+AuthorizationClient -> AuthorizationServer [label = "Obtain RESTful Authorization \[ITI-WW\]"];
+AuthorizationClient -> ResourceServer [label = "Authorized RESTful Transaction \[ITI-XX\]"];
+
+}

@@ -1,0 +1,13 @@
+@startuml
+AuthorizationClient -> ResourceServer : Resource Request 
+AuthorizationClient <- ResourceServer : Redirect to AuthorizationService
+
+AuthorizationClient -> AuthorizationServer : Authorization Request 
+AuthorizationClient <- AuthorizationServer : Authentication Query
+
+AuthorizationClient -> AuthorizationServer : Authentication Reply
+AuthorizationClient <- AuthorizationServer : Authorization Response + Token B
+
+AuthorizationClient -> ResourceServer : Resource Request + Token B 
+AuthorizationClient <- ResourceServer : Resource Response
+@enduml

@@ -1,0 +1,12 @@
+@startuml
+
+group Token can be obtained by any method including [ITI-WW]
+"any token source" --> ClientAuthorizationAgent : Token B (unspecified method)
+end
+
+group Authorized RESTful Transaction [ITI-XX]
+ClientAuthorizationAgent -> ResourceService : Resource Request + Token B
+ClientAuthorizationAgent <- ResourceService : Resource Response
+end
+
+@enduml

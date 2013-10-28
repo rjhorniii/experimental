@@ -1,0 +1,12 @@
+
+@startuml
+
+group Get Authorization Token [ITI-71]
+AuthorizationClient -> AuthorizationServer : Authorization Request
+AuthorizationClient <- AuthorizationServer : Authorization Response + Authorization Token
+end
+group Incorporate Authorization Token [ITI-72]
+AuthorizationClient -> ResourceServer : Resource Request + Authorization Token
+AuthorizationClient <- ResourceServer : Resource Response
+end
+@enduml

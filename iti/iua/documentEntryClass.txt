@@ -1,0 +1,78 @@
+@startuml
+
+skinparam monochrome true
+
+class DocumentEntry      {
+      entryUUID : UUID
+      logicalID : UUID [0..1]
+      mimeType : string
+      availabilityStatus : URN
+      hash : SHA1
+      size : integer
+      languageCode : RFC 3066
+      legalAuthenticator : XCM
+      repositoryUniqueID : OID
+      serviceStartTime : DTM [0..1]
+      serviceStopTime : STM [0..1]
+      sourcePatientID : CX
+      sourcePatientInfo : PID [0..1]
+      URI : URI [0..1]
+      title : string [0..1]
+      comments : string [0..1]
+      version : integer [0..1]
+      patientID : CX
+      uniqueID : OID
+      classCode : Code
+      confidentialityCode : Code [0..1]
+      eventCodeList : Code [0..*]
+      formatCode : Code
+      healthcareFacilityTypeCode : Code
+      practiceSettingCode : Code
+      typeCode : Code
+      documentAvailability : URN [0..1]
+      homeCommunityID : URN [0..1]
+      pushMetadata : URN [0..1]
+}
+
+class author {
+      authorInstitution : XON[*]
+      authorPerson : XCN
+      authorRole : string [*]
+      authorSpecialty L CE [*]
+}
+
+class Code <<DataType>> <<DS>> {
+      code : string
+      displayName : string
+      codingScheme : OID
+}
+
+class CX <<DataType>> <<HL7 V2 Identifier>> {
+      identifier : string
+      assigningAuthority : string
+      universalIdType : string
+}
+
+class XCN <<DataType>> <<HL7 V2 Extended Person Name>> {
+      identifier : string
+      lastName : string
+      assigningAuthority : string
+      universalIdType : string
+}
+
+class SHA1 <<DataType>> <<Document hash calculated with SHA1>>
+
+class OID <<DataType>> <<ISO Object Identifier>>
+
+class UUID <<DataType>> <<UUID in URN syntax>>
+
+class URI <<DataType>> <<URI RFC 2616>>
+
+class DTM <<DataType>> <<HL7 V2 Date Time>>
+
+DocumentEntry "1" *-- "many" author
+
+hide DocumentEntry circle
+hide author circle
+hide class circle
+@enduml

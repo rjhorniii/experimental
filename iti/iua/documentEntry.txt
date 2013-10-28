@@ -1,0 +1,87 @@
+@startuml
+
+skinparam monochrome true
+
+interface DocumentEntry {
+entryUUID : UUID
+logicalId : UUID [0..]
+mimeType : string
+availabilityStatus : URN
+hash : SHA1
+size : integer
+languageCode : RFC 3066
+legalAuthenticator : XCN
+repositoryUniqueID : OID
+serviceStartTime : DTM [0..1]
+serviceStopTime : DTM [0..1]
+sourcePatientID : CX
+sourcePatientInfo : PIS [0..1]
+URI : USR [0..1]
+title : string [0..1]
+comments : string [0..1]
+version : integer [0..1]
+patientID : CX
+uniqueID : OID
+classCode : Code
+confidentialityCode : Code [1..*]
+eventCodeList : Code [1..*]
+formatCode : Code
+healthcareFacilityTypeCode : Code
+practiceSettingCode : Code
+typeCode : code
+documentAvailability : URN [0..1]
+homeCommunityID : URN [0..1]
+pushMetadata : URN [0..1]
+}
+
+interface author {
+authorInstitution : XON [*]
+authorPerson : XCN
+otherROle : string[*]
+authorSpecialty : CE [*]
+}
+
+
+class code <<Datatype>> {
+code : string
+displayName : string
+codingScheme : OID
+}
+
+class XCN <<HL7 V2 Extended Person Name>> {
+identifier : string
+lastName : string
+assigningAuthority : string
+universalIDType : string
+}
+
+class CX <<HL7 V2 Identifier>> {
+      identifier : string
+      assigningAuthority : string
+      univeralIDType : string
+}
+
+class SHA1 <<Document hash calculated with SHA1>> 
+
+class XON <<HL7 V2 Organization Name>> {
+      name : string
+      assigningAuthority : string
+      universalIDType : string
+      organizationID : string [0..1]
+}
+
+class OID <<IDO Object Identifier>>
+
+class UUID <<UUID using URN Syntax>>
+
+class URI <<URI RFC 2616>>
+
+class DTM <<HL7 v@ Date Time>>
+
+DocumentEntry "1" *-- "many" author
+
+hide DocumentEntry circle
+hide author circle
+hide class circle
+@enduml
+

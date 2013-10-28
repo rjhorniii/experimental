@@ -1,0 +1,9 @@
+@startuml
+AuthorizationClient -> IntegratedAuthorizationService : Authorization Request
+AuthorizationClient <-- IntegratedAuthorizationService : Authentication Query
+AuthorizationClient -> IntegratedAuthorizationService : Authentication Reply
+AuthorizationClient <-- IntegratedAuthorizationService : Authorization Response + Token B
+
+AuthorizationClient -> ResourceService : Resource Request + Token B
+AuthorizationClient <-- ResourceService : Resource Response
+@enduml
